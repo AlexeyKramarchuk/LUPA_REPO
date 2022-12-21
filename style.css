@@ -24,6 +24,11 @@ img {
     transform: scale(0.9)
 }
 
+.active {
+    transform: scale(1);
+    object-fit: none;
+}
+
 .wrapper {
     margin: auto;
 }

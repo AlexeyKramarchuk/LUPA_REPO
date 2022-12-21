@@ -21,8 +21,7 @@ wrapper.style.height = '500px';
 
 image.addEventListener('click', (e) => {
     console.log(e)
-    image.style.transform = 'scale(2)';
-
+    image.classList.toggle('active')
 })
 
 image.addEventListener('mousemove', (e) => {
