@@ -27,6 +27,8 @@ img {
 .active {
     transform: scale(1);
     object-fit: none;
+    cursor: zoom-out;
+
 }
 
 .wrapper {

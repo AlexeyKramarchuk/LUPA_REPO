@@ -1,6 +1,8 @@
 // function zoom(event) {
 //     let zoomer = event.currentTarget;
 
+// console.log(event)
+
 //     event.offsetX ? (offsetX = event.offsetX) : (offsetX = event.touches[0].pageX);
 //     event.offsetY ? (offsetY = event.offsetY) : (offsetX = event.touches[0].pageX);
 
@@ -19,12 +21,14 @@ wrapper.style.width = '500px';
 wrapper.style.height = '500px';
 
 
-image.addEventListener('click', (e) => {
-    console.log(e)
+image.addEventListener('mousedown', (e) => {
     image.classList.toggle('active')
 })
 
 image.addEventListener('mousemove', (e) => {
-    // console.log(e)
-})
+    console.log(e)
+});
+
+
+
 
