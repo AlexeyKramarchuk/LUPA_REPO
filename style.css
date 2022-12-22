@@ -21,16 +21,20 @@ img {
     height: 100%;
     object-fit: contain;
     cursor: zoom-in;
-    transform: scale(0.9)
-}
-
-.active {
+    transform: scale(0.9);
+  }
+  
+  .active {
     transform: scale(1);
     object-fit: none;
     cursor: zoom-out;
-
-}
-
-.wrapper {
+    width: auto;
+    height: auto;
+  }
+  
+  .wrapper {
+    height: 500px;
     margin: auto;
-}
+    overflow: hidden;
+    width: 500px;
+  }
