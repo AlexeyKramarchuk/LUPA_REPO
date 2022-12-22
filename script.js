@@ -16,28 +16,43 @@ wrapper.addEventListener('mousedown', (e) => {
   //zmieniam flagę na przeciwną - toggle
   isZoomIn = !isZoomIn;
 
+  console.log({ wrapper });
+
   //ustawiam początkową pozycję tam gdzie kliknął user
-  startPos = { x, y };
+  startPos = { x: x - wrapper.offsetLeft, y: y - wrapper.offsetTop };
 
   //Jeżeli zdjęcie przestaje być przybliżone to resetuję pozycję zdjęcia
   if (!isZoomIn) {
     image.style.transform = 'unset';
+  } else {
+    setImageTranslate(startPos.x, startPos.y);
   }
 });
 
 wrapper.addEventListener('mousemove', (e) => {
-  //pobieram współrzędne x oraz y gdzie obecnie znajduje się kursor myszy
-  const { x, y } = e;
-
   //przesuwanie ma  działać tylko gdy zdjęcie jest powiększone
   if (isZoomIn) {
-    //obliczam o ile px w osi x oraz y użytkownik poruszył myszką od punktu w którym kliknął
-    const diff = { x: x - startPos.x, y: y - startPos.y };
+    //pobieram współrzędne x oraz y gdzie obecnie znajduje się kursor myszy
+    const { x, y } = e;
 
-    //zamieniam różnicę w px na % względem wrappera, aby user mógł zobaczyć całe zdjęcie niezależnie o ile jest ono większe niż wrapper
-    const relativeDiff = { x: (diff.x / wrapper.clientWidth) * 100, y: (diff.y / wrapper.clientHeight) * 100 };
+    const offsetX = x - wrapper.offsetLeft;
+    const offsetY = y - wrapper.offsetTop;
 
-    //przesuwam zdjęcie wewnątrz kontenera
-    image.style.transform = `translate(${relativeDiff.x}%, ${relativeDiff.y}%)`;
+    setImageTranslate(offsetX, offsetY);
   }
 });
+
+function getRelativeValues(x, y) {
+  const coordX = (x / wrapper.clientWidth) * 100;
+  const coordY = (y / wrapper.clientHeight) * 100;
+
+  return { coordX, coordY };
+}
+
+function setImageTranslate(x, y) {
+  const { coordX, coordY } = getRelativeValues(x, y);
+  const boundyX = (wrapper.clientWidth / image.naturalWidth) * 100;
+  const boundyY = (wrapper.clientHeight / image.naturalHeight) * 100;
+
+  image.style.transform = `translate(${0 - coordX + boundyX}%, ${0 - coordY + boundyY}%)`;
+}
